@@ -1,0 +1,11 @@
+{
+  "name": "thegreatclockworkbot",
+  "version": "2.0.0",
+  "engines": {
+   "node": ">=18.9.0"
+  },
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "discord.js-commando": "^0.12.3"
+  }
+}
