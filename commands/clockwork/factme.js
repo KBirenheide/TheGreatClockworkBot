@@ -9,32 +9,38 @@ class FactOfTheDay extends Discord.Command
             group: "clockwork",
             memberName: "factme",
             description: "Display a random Aqualon Fact of the Day"
-        });
+        });	
+		
     }
-
+		
     async run(message, args) 
-    {
-
-	var scoopchannel = "";
+    {	
+	var dailyfacts = message.guild.channels.cache.get("408726317970751490");
 	
+	var scoopchannel = "";
+	//var factsOfTheDay = message.guild.channels.get("408726317970751490");
 		
 			function crawlmessages(preid, messagecollection) 
-			{	
-					scoopchannel = scoopchannel + messagecollection.toString();	
+			{		
+				
+				scoopchannel = scoopchannel + messagecollection.toString();	
 					
 				if (preid == "none")
 				{
-				message.guild.channels.get("408726317970751490").fetchMessages({limit: 10}).then(messages => 
+					
+					dailyfacts.messages.fetch({limit: 100}).then(messages => 
 						{						
-							if(Array.from(messages).length == 10)
+							
+							if(Array.from(messages).length == 100)
 							{
 								crawlmessages(messages.last().id, Array.from(messages));
 							}
 							else
 							{
-								var regmatches = messages.toString().match(/#*```(.*?)```/g);
+								
+								var regmatches = messages.toString().match(/#.*?```(.*?)```/g);
 								var getfact = "There was an uncashed Exception, sorry."; 
-								var exceptions = ["436573366842032128", "434514788966465546", "439612340745404446"];
+								var exceptions = ["436573366842032128", "434514788966465546", "439612340745404446", "501868032751173632"];
 								var cashsearchnone = 0;
 								
 								if (args.length > 2)
@@ -71,7 +77,7 @@ class FactOfTheDay extends Discord.Command
 											/* console.log(regmatches); */
 										}while(new RegExp(exceptions.join("|")).test(getfact));
 									
-										message.channel.send("Did you know this?" + getfact);
+										message.channel.send("Did you know this? \nFact " + getfact);
 									} 
 								
 								message.channel.send(regmatches.length);
@@ -82,18 +88,19 @@ class FactOfTheDay extends Discord.Command
 				}
 				else
 				{
-				message.guild.channels.get("408726317970751490").fetchMessages({limit: 10, before: preid}).then(messages => 
+					dailyfacts.messages.fetch({limit: 100, before: preid}).then(messages => 
 						{	
-						
-							if(Array.from(messages).length == 10)
+							
+							if(Array.from(messages).length == 100)
 							{						
 								crawlmessages(messages.last().id, Array.from(messages))
 							}
 							else
 							{
-								var regmatches = scoopchannel.toString().match(/#*```(.*?)```/g);
+							
+								var regmatches = scoopchannel.toString().match(/#.*?```(.*?)```/g);
 								var getfact = "There was an uncashed Exception, sorry."; 
-								var exceptions = ["436573366842032128", "434514788966465546"];
+								var exceptions = ["436573366842032128", "434514788966465546", "439612340745404446", "501868032751173632"];
 								var cashsearchnone = 0;
 								if (args.length > 2)
 										{
@@ -129,8 +136,9 @@ class FactOfTheDay extends Discord.Command
 												/* console.log(regmatches); */
 											}while(new RegExp(exceptions.join("|")).test(getfact));
 										
-											message.channel.send("Did you know this?" + getfact);
+											message.channel.send("Did you know this? \nFact " + getfact);
 										} 
+														
 							}
 						
 						}).catch(err => {
