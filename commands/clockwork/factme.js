@@ -21,8 +21,7 @@ class FactOfTheDay extends Discord.Command
 	//var factsOfTheDay = message.guild.channels.get("408726317970751490");
 		
 			function crawlmessages(preid, messagecollection) 
-			{		
-				
+			{						
 				scoopchannel = scoopchannel + messagecollection.toString();	
 					
 				if (preid == "none")

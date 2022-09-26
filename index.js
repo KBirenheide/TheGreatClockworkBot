@@ -9,7 +9,7 @@ gcbot.registry.registerGroup('clockwork', 'The Great Clockwork');
 gcbot.registry.registerDefaults();
 gcbot.registry.registerCommandsIn(__dirname + "/commands")
 
-const token = "[Enter APP Token]";
+const token = "[Enter App Token]";
 
 gcbot.login(token);
 
